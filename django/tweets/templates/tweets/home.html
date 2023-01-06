@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ::before,
+        ::after,
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .tweet-form-container {
+            padding: 3rem 0;
+        }
+        form {
+            /* border: 2px solid blue; */
+            margin: 0 auto;
+            width: 40%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            /* padding: 1.5rem; */
+        }
+        form > textarea {
+            flex: 0 0 100%;
+            padding: 1rem;
+            resize: none;
+            border-radius: 10px;
+            border: 1px solid rgb(173, 216, 230);
+        }
+        form > textarea:focus {
+            outline: none
+        }
+        form  > div {
+            flex: 0 0 100%;
+            text-align: end;
+        }
+        form > div > button {
+            padding: 0.7rem 1rem;
+            margin-top: 0.5rem;
+            box-shadow: none;
+            border: none;
+            background: rgb(43, 168, 226);
+            color: white;
+            letter-spacing: 0.05rem;
+            border-radius: 5px;
+            cursor: pointer;
+            
+        }
+        form > div > button:focus {
+            outline:none;
+        }
+    </style>
+</head>
+<body>
+    <div class="tweet-form-container">
+        <form id='tweet-form' action="/new/tweet" method="POST">
+            {% csrf_token%}
+            <input type="hidden" value="/" name="next">
+            <textarea name="content" id="" cols="50" rows="10" placeholder="Your tweet...."></textarea>
+            <div>
+                <button type="submit">Tweet</button>
+            </div>
+        </form>
+    </div>
+    <div id="tweets">
+        
+    </div>
+
+
+
+    <script type="text/javascript">
+        const tweetForm = document.querySelector('#tweet-form')
+        tweetForm.addEventListener('submit', function(event){
+            event.preventDefault()
+            const form =  event.target
+            const formData = new FormData(form)
+            const url = form.getAttribute('action')
+            const method = form.getAttribute('method')
+            const responseType = ''
+            
+            // for(let i of formData.entries()){
+            //     console.log(i)
+            // }
+            const xhr = new XMLHttpRequest()
+            xhr.open(method, url)
+            xhr.onload = function(){
+                console.log(xhr.response)
+            }
+            xhr.send(formData)
+            
+
+
+        })
+        
+
+    </script>
+</body>
+</html>
