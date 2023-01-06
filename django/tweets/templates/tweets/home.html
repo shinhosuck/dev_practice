@@ -17,14 +17,12 @@
             padding: 3rem 0;
         }
         form {
-            /* border: 2px solid blue; */
             margin: 0 auto;
             width: 40%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            /* padding: 1.5rem; */
         }
         form > textarea {
             flex: 0 0 100%;
@@ -55,6 +53,30 @@
         form > div > button:focus {
             outline:none;
         }
+        #tweets {
+            padding-bottom: 3rem;
+        }
+        .tweet-wrapper {
+            width: 50%;
+            border: 2px solid lightgray;
+            margin: 0.5rem auto;
+            padding: 1rem;
+            line-height: 1.5;
+            border-radius: 10px;
+        }
+        .tweet-wrapper > p {
+            letter-spacing: 0.05rem;
+        }
+        .tweet-wrapper > button {
+            padding: 0.8rem 1rem;
+            box-shadow: none;
+            border: none;
+            background: rgb(0, 170, 255);
+            margin-top: 0.5rem;
+            color: white;
+            border-radius: 5px;
+            letter-spacing: 0.05rem;
+        }
     </style>
 </head>
 <body>
@@ -71,9 +93,6 @@
     <div id="tweets">
         
     </div>
-
-
-
     <script type="text/javascript">
         const tweetForm = document.querySelector('#tweet-form')
         tweetForm.addEventListener('submit', function(event){
@@ -90,15 +109,41 @@
             const xhr = new XMLHttpRequest()
             xhr.open(method, url)
             xhr.onload = function(){
-                console.log(xhr.response)
+                loadTweets()
             }
             xhr.send(formData)
-            
-
-
         })
-        
 
+        const tweets = document.querySelector('#tweets')
+
+        const loadTweets = function(){
+            const xhr = new XMLHttpRequest()
+            const method = 'GET'
+            const url = '/tweets'
+            const responseType = 'json'
+
+            xhr.responseType = responseType
+            xhr.open(method, url)
+            xhr.onload = function(){
+                let data = xhr.response.tweets
+                for(let i = 0; i < data.length; i++ ){
+                    let tweetWrapper = document.createElement('div')
+                    tweetWrapper.classList = 'tweet-wrapper'
+                    let id = data[i].id
+                    let title = data[i].title
+                    let content = data[i].content
+                    tweetWrapper.innerHTML = `<p>ID: ${id}</p><p>Title: ${title}</p><p>Content: ${content}
+                                            </p><button>Likes</button>`
+                    tweets.append(tweetWrapper)
+                }
+
+                // let wrappers = document.querySelectorAll('.tweet-wrapper')
+                let wrappers = tweets.children
+                console.log(wrappers)
+            }
+            xhr.send()
+        }
+        loadTweets()
     </script>
 </body>
 </html>
