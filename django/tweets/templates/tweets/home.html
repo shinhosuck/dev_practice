@@ -84,7 +84,7 @@
         <form id='tweet-form' action="/new/tweet" method="POST">
             {% csrf_token%}
             <input type="hidden" value="/" name="next">
-            <textarea name="content" id="" cols="50" rows="10" placeholder="Your tweet...."></textarea>
+            <textarea name="content" id="" cols="50" rows="10" required placeholder="Your tweet...."></textarea>
             <div>
                 <button type="submit">Tweet</button>
             </div>
@@ -108,7 +108,10 @@
             // }
             const xhr = new XMLHttpRequest()
             xhr.open(method, url)
+            xhr.setRequestHeader('HTTP_X_REQUESTED_WITH', 'XMLHttpRequest')
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
             xhr.onload = function(){
+                tweetForm.reset()
                 loadTweets()
             }
             xhr.send(formData)
@@ -126,17 +129,23 @@
             xhr.open(method, url)
             xhr.onload = function(){
                 let data = xhr.response.tweets
+                let tweetWrapper = ''
                 for(let i = 0; i < data.length; i++ ){
-                    let tweetWrapper = document.createElement('div')
-                    tweetWrapper.classList = 'tweet-wrapper'
+                    // let tweetWrapper = document.createElement('div')
+                    // tweetWrapper.classList = 'tweet-wrapper'
                     let id = data[i].id
                     let title = data[i].title
                     let content = data[i].content
-                    tweetWrapper.innerHTML = `<p>ID: ${id}</p><p>Title: ${title}</p><p>Content: ${content}
-                                            </p><button>Likes</button>`
-                    tweets.append(tweetWrapper)
+                    tweetWrapper += `
+                                    <div class='tweet-wrapper'>
+                                        <p>ID: ${id}</p>
+                                        <p>Title: ${title}</p>
+                                        <p>Content: ${content}</p>
+                                        <button>Likes</button>
+                                    </div>
+                                    `
                 }
-
+                tweets.innerHTML = tweetWrapper
                 // let wrappers = document.querySelectorAll('.tweet-wrapper')
                 let wrappers = tweets.children
                 console.log(wrappers)
