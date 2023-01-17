@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
+from django.utils.http import is_safe_url
 from django.http import JsonResponse
 from tweets.models import Tweet
 from .forms import tweetCreateForm
 import random
+from django.conf import settings
+
+ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 
 def home_view(request):
     return render(request, template_name='tweets/home.html', context=None)
@@ -23,11 +27,18 @@ def tweet_list_view(request):
 
 def tweet_create_view(request):
     if request.method == 'POST':
+        redirect_url = request.POST.get('next')
+        print(is_safe_url(redirect_url, ALLOWED_HOSTS))
         form = tweetCreateForm(request.POST)
         if form.is_valid():
-            form.save()
-            print('valid')
-            return redirect('tweets:home')
-        print('not valid')
-        return redirect('tweets:home')
+            if redirect_url and is_safe_url(redirect_url, ALLOWED_HOSTS):
+                print('valid')
+                form.save()
+                return redirect(redirect_url)
+            else:
+                print('not a safe url')
+                return redirect(redirect_url)
+        else:
+            print('not valid')
+            return redirect(redirect_url)
     
