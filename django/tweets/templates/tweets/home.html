@@ -114,7 +114,7 @@
 
 
     <script type="text/javascript">
-        const tweetsContainer = document.querySelector('#tweets-container')
+        let tweetsContainer = document.querySelector('#tweets-container')
         const tweetForm = document.querySelector('#tweet-form')
         
         
@@ -126,11 +126,30 @@
             const method = form.getAttribute('method')
             const url = form.getAttribute('action')
             const xhr = new XMLHttpRequest()
+            const responseType = 'json'
+
+            xhr.responseType = responseType
             xhr.open(method, url)
+            xhr.setRequestHeader('HTTP_X_REQUESTED_WITH', 'XMLHttpRequest')
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
             xhr.onload = function(){
-                console.log(xhr.response)
+                // console.log(xhr.response)
+                let tweetsInnerHtml = tweetsContainer.innerHTML
+                let newTweet = xhr.response
+                let newTweetDiv = `<div class='tweet-wrapper'>
+                                    <p>Tweet:${newTweet.id}</p>
+                                    <p>${newTweet.title}</p>
+                                    <p>${newTweet.content}</p>
+                                    <div>
+                                        <a href="#">Reply</a>
+                                        <a href="#">0 like</a> 
+                                        <a href="#">0 following</a>
+                                    </div>
+                                </div>`
+                
+                tweetsContainer.innerHTML = newTweetDiv + tweetsInnerHtml
                 tweetForm.reset()
-                loadTweets()
+                // loadTweets()
             }
             xhr.send(formData)
 

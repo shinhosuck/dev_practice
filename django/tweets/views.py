@@ -13,7 +13,7 @@ def home_view(request):
 
 
 def tweet_list_view(request):
-    all_tweets = Tweet.objects.all().order_by('-id')
+    all_tweets = Tweet.objects.all()
     tweet_list = []
     for tweet in all_tweets:
         likes = random.randint(0, 100)
@@ -27,17 +27,21 @@ def tweet_list_view(request):
 
 def tweet_create_view(request):
     if request.method == 'POST':
+        print(request.is_ajax())
         redirect_url = request.POST.get('next')
-        print(is_safe_url(redirect_url, ALLOWED_HOSTS))
+        # print(is_safe_url(redirect_url, ALLOWED_HOSTS))
         form = tweetCreateForm(request.POST)
         if form.is_valid():
-            if redirect_url and is_safe_url(redirect_url, ALLOWED_HOSTS):
-                print('valid')
-                form.save()
-                return redirect(redirect_url)
-            else:
-                print('not a safe url')
-                return redirect(redirect_url)
+            new_tweet = form.save()
+            data = {'id': new_tweet.id, 'title': new_tweet.title, 'content': new_tweet.content}
+            return JsonResponse(data, status=201)
+            # if redirect_url and is_safe_url(redirect_url, ALLOWED_HOSTS):
+            #     print('valid')
+            #     form.save()
+            #     return redirect(redirect_url)
+            # else:
+            #     print('not a safe url')
+            #     return redirect(redirect_url)
         else:
             print('not valid')
             return redirect(redirect_url)
