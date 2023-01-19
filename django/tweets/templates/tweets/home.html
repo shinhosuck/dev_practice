@@ -1,0 +1,54 @@
+{% extends 'tweets/index.html' %}
+
+
+<title>
+    {% block title %}
+        Home page
+    {% endblock title %}
+</title>
+
+
+{% block content %}
+    <div class="tweet-form-container">
+        <form class='tweet-form' action="{% url 'tweets:new-tweet' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" value="{% url 'tweets:home' %}" name="next">
+            <input type="text" name="title" placeholder="Title">
+            <textarea name="content" id="" cols="30" rows="10" placeholder="Your tweet..."></textarea>
+            <button type="submit">Tweet</button>
+        </form>
+    </div>
+    <div class="tweets-container">
+        <h1>Home page</h1>
+        <div class="tweets">
+            <h2>Tweets go here</h2>
+        </div>
+    </div>
+
+
+
+
+
+
+<script type="text/javascript">
+    const tweetForm = document.querySelector('.tweet-form')
+    
+    tweetForm.addEventListener('submit', function(event){
+        event.preventDefault()
+
+        const targetElement = event.target
+        const newTweetForm = new FormData(targetElement)
+        const method = targetElement.getAttribute('method')
+        const url = targetElement.getAttribute('action')
+        const responseType = 'json'
+        const xhr = new XMLHttpRequest()
+
+        xhr.responseType = responseType
+        xhr.open(method, url)
+        xhr.onload = function() {
+            console.log(xhr.response)
+        }
+        xhr.send(newTweetForm)
+    })
+</script>
+{% endblock content %}
