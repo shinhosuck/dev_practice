@@ -6,4 +6,4 @@ from django import forms
 class TweetCreateForm(forms.ModelForm):
     class Meta:
         model = Tweet 
-        fields = ['content']
+        fields = ['title', 'content']
