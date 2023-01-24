@@ -10,7 +10,13 @@
     </title>
 </head>
 <body>
-    {% block content %}
-    {% endblock content %}
+    <header>
+        {% include 'tweets/nav.html' %}
+    </header>
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+    
 </body>
 </html>

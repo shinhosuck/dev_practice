@@ -10,7 +10,8 @@
 
 {% block content %}
     <div class="tweet-form-container">
-        <form class='tweet-form' action="{% url 'tweets:new-tweet' %}" method="POST">
+        <div class="error" style="color: red; padding: 1rem;"></div>
+        <form id='tweet-form' action="{% url 'tweets:new-tweet' %}" method="POST">
             {% csrf_token %}
             <input type="hidden" value="{% url 'tweets:home' %}" name="next">
             <input type="text" name="title" placeholder="Title">
@@ -20,8 +21,7 @@
     </div>
     <div class="tweets-container">
         <h1>Home page</h1>
-        <div class="error" style="color: red; padding: 1rem;"></div>
-        <div class="tweets">
+        <div id="tweets">
             <h2>Tweets go here</h2>
         </div>
     </div>
@@ -32,8 +32,10 @@
 
 
 <script type="text/javascript">
-    const tweetForm = document.querySelector('.tweet-form')
-    const tweets = document.querySelector('.tweets')
+    const tweetForm = document.querySelector('#tweet-form')
+    const tweets = document.querySelector('#tweets')
+
+    let tweetsChildren = []
 
     tweetForm.addEventListener('submit', function(event){
         event.preventDefault()
@@ -47,6 +49,8 @@
 
         xhr.responseType = responseType
         xhr.open(method, url)
+        xhr.setRequestHeader('HTTP_X_REQUESTED_WITH', 'XMLHttpRequest')
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
         xhr.onload = function() {
             let jsonResponse = xhr.response
             if(jsonResponse.error) {
@@ -55,11 +59,18 @@
                 error.textContent = jsonResponse.error
                 tweetForm.reset()
             }else {
-                let tweet = `<div style='border: 1px solid gray; padding: 1rem; line-height: 1.5'>
+                let tweet = `<div  id='${jsonResponse.id}'style='border: 1px solid gray; padding: 1rem; line-height: 1.5'>
                                 <p>ID ${jsonResponse.id}</p>
                                 <h3>${jsonResponse.title}</h3>
                                 <p>${jsonResponse.content}</p>
+                                <div>
+                                    <a href="#">Reply</a>
+                                    <a href="#">Like</a>
+                                    <a href="#">Follow</a>
+                                    <a href="#">Delete</a>
+                                </div>
                             </div>`
+                tweets.id = jsonResponse.id
                 tweets.innerHTML = tweet + tweets.innerHTML
                 let error = document.querySelector('.error')
                 error.textContent = ''
@@ -81,13 +92,43 @@
             const allTweets = [...xhr.response.tweets]
             let tweetsList = '';
             allTweets.forEach(function(tweet){
-                tweetsList += `<div style='border: 1px solid gray; padding: 1rem; line-height: 1.5'>
+                tweetsList += `<div id='tweet${tweet.id}' style='border: 1px solid gray; padding: 1rem; line-height: 1.5'>
                                     <p>ID ${tweet.id}</p>
                                     <h3>${tweet.title}</h3>
                                     <p>${tweet.content}</p>
+                                    <div>
+                                        <span>${tweet.author}</span>
+                                        <a href="#">Reply</a>
+                                        <a href="#">Like</a>
+                                        <a href="#">Follow</a>
+                                        <a id='${tweet.id}' href="#">Delete</a>
+                                    </div>
                                 </div>`
             })
             tweets.innerHTML = tweetsList
+
+            tweetsChildren = [...tweets.children] 
+            tweetsChildren.forEach(function(tweet) {
+                const delBtn = tweet.children[3].children[4]
+                delBtn.addEventListener('click', function(event) {
+                    event.preventDefault()
+                    let id = parseInt(event.currentTarget.id)
+                    let xhr = new XMLHttpRequest(id)
+                    let method = 'GET'
+                    let url = "tweet/delete/" + id
+                    let responseType = 'json'
+                    xhr.responseType = responseType
+                    xhr.open(method, url)
+                    xhr.onload = function(){
+                        loadTweets()
+                        let response = xhr.response
+                        let id = response.id
+                        let element = document.querySelector('#tweet' + String(id))
+                        console.log(element)
+                    }
+                    xhr.send()
+                })
+            })
         }
         xhr.send()
     }
