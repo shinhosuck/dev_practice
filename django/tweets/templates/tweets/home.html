@@ -58,7 +58,13 @@
                 let error = document.querySelector('.error')
                 error.textContent = jsonResponse.error
                 tweetForm.reset()
-            }else {
+            }
+            else if(jsonResponse.annonymous) {
+                console.log(jsonResponse.annonymous)
+                alert(jsonResponse.annonymous)
+                window.location.href = '{% url "users:login" %}'
+            }
+            else {
                 let tweet = `<div  id='${jsonResponse.id}'style='border: 1px solid gray; padding: 1rem; line-height: 1.5'>
                                 <p>ID ${jsonResponse.id}</p>
                                 <h3>${jsonResponse.title}</h3>

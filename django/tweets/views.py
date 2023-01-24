@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.http import JsonResponse
@@ -10,15 +11,21 @@ def home_view(request):
 
 
 def my_tweet_view(request):
-    user = User.objects.get(username = request.user)
-    print(user.tweet_set.all())
-    return redirect('tweets:home')
+    try:
+        user = User.objects.get(username = request.user)
+        print(user.tweet_set.all())
+        return redirect('tweets:home')
+    except:
+        return redirect('tweets:home')
 
 
 def tweet_create_view(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'annonymous': 'You are not logged in. Please login to tweet.'})
     form = TweetCreateForm(request.POST or None)
-    print(request.is_ajax())
-    redirect_url = request.POST.get('next')
+    # print(form['title'].value())
+    # print(request.is_ajax())
+    # redirect_url = request.POST.get('next')
     if form.is_valid():
         new_tweet = form.save()
         obj = Tweet.objects.get(id=new_tweet.id)

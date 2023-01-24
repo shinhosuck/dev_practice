@@ -1,0 +1,40 @@
+==========
+TIME TABLE
+==========
+REST API:
+51:35 - Dynamic View into Rest API Endpoint
+1:56:55 - Tweet form by hand
+
+Example:
+    from django.http import JsonResponse
+    from tweets.models import Tweet
+
+    FROM VIEWS.PY:
+    -Rest apt view
+        def detail_view(request, tweet_id):
+            data = {
+                'id': id
+            }
+            status = 200
+            try:
+                tweet = Tweet.objects.get(id=tweet_id)
+                data['content'] = tweet.content
+            except:
+                data['message'] = 'Not found'
+                status = 404
+            return JsonResponse(data, status=status)
+
+Load TWEETS USING JAVASCRIPT:
+1:08:04 - 2:07:47- Dynamic Load Tweets via Javascript
+2:04:59 - safe redirect url - is_safe_url()
+2:08:30 - Prevent form submit via javascript
+2:12:38 - sending form data via pure javascript
+2:22:06 - handling ajax requests
+2:26:50 - serialize django model objects
+2:33:33 - append new tweet and reorder
+2:37:11 - handling form error
+2:49:30 - users and tweets
+2:57:11 - django admin
+3:07:24 - associate authenticated user to object
+3:29:59 - permission and roadmap
+3:16:19 - install django rest framework

@@ -1,0 +1,23 @@
+{% extends 'tweets/index.html' %}
+
+
+<title>
+    {% block title %}
+        Login
+    {% endblock title %}
+</title>
+
+
+
+{% block content %}
+    <div style="width: 90%; margin: 0 auto;">
+        <h1>Login page</h1>
+        <form action="/login" method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password1" placeholder="Password">
+            <input type="password" name="password2" placeholder="Enter same password">
+            <button type="submit">Login</button>
+        </form>
+    </div>
+{% endblock content %}
