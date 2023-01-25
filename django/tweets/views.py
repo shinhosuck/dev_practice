@@ -1,61 +1,41 @@
-from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.http import JsonResponse
 from .forms import TweetCreateForm
-from tweets.models import Tweet
 
 
 def home_view(request):
     return render(request, 'tweets/home.html', context=None)
 
 
-def my_tweet_view(request):
-    try:
-        user = User.objects.get(username = request.user)
-        print(user.tweet_set.all())
-        return redirect('tweets:home')
-    except:
-        return redirect('tweets:home')
-
-
 def tweet_create_view(request):
-    if not request.user.is_authenticated:
-        return JsonResponse({'annonymous': 'You are not logged in. Please login to tweet.'})
-    form = TweetCreateForm(request.POST or None)
-    # print(form['title'].value())
-    # print(request.is_ajax())
-    # redirect_url = request.POST.get('next')
-    if form.is_valid():
-        new_tweet = form.save()
-        obj = Tweet.objects.get(id=new_tweet.id)
-        obj.author = request.user
-        obj.save()
-        print('The form is valid')
+    user = request.user
+    if user.is_authenticated:
+        # if request.method == "POST":
+            # redirect_url = request.POST.get('next')
+            # print(redirect_url)
+        form = TweetCreateForm(request.POST)
+        if form.is_valid():
+            tweet = form.save(commit=False)
+            data = {
+                'title': tweet.title, 
+                'content': tweet.content
+            }
+            return JsonResponse(data)
+        print('not a valid form')
         data = {
-            'id': obj.id,
-            'author': obj.author.username, 
-            'title': obj.title,
-            'content': obj.content
+            'error': 'The form is not valid. Please check the "Title" and "Content" and tweet again.'
         }
         return JsonResponse(data)
+        # return redirect(redirect_url)
     else:
-        print('The form is not valid')
         data = {
-            'error': 'The form is not valid. Tweet title or content is missing.'
+            'annonymous': 'Please login to tweet'
         }
         return JsonResponse(data)
+        # return redirect('tweets:home')
 
 
-def tweets_view(request):
-    tweets = Tweet.objects.all()
-    tweet_list = [{'id':tweet.id, 'author': tweet.author.username, 'title': tweet.title, 'content': tweet.content } for tweet in tweets]
-    data = {'tweets': tweet_list}
-    return JsonResponse(data)
-
-
-def tweet_delete(request, id):
-    tweet = Tweet.objects.get(id = int(id))
-    print(tweet)
-    tweet.delete()
-    return JsonResponse(data={'id': int(id)})
+def search_view(request):
+    data = request.GET.get('search')
+    print(data)
+    return render(request, 'tweets/home.html', {'data': data})

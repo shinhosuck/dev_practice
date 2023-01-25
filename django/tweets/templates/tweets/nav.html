@@ -1,49 +1,89 @@
-
 <style>
     .nav-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
+       display: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       border-bottom: 1px solid rgb(226, 226, 226);
+    }
+    .nav-wrapper {
         width: 90%;
-        margin: 0 auto
+        margin: 0 auto;
+        padding: 1.5rem 0;
     }
-    .brand-name > a {
-        text-decoration: none;
+    .brand-name-wrapper > a {
+        font-size: 1.8rem;
         display: inline-block;
-        font-size: 2rem;
+        padding: 1rem;
+        background: rgb(0, 102, 128);
+        color:rgb(0, 217, 255);
         font-weight: bold;
-        color: rgb(0, 153, 255)
+        letter-spacing: 0.06rem;
+        border-radius: 10px;
     }
-    .nav-items {
+    
+    .nav-items > li > a {
+        letter-spacing: 0.05rem;
+        color: rgb(51, 51, 51);
+        display: inline-block;
+        /* text-transform: uppercase; */
+    }
+    .search-form {
+        flex: 2;
         display: flex;
         align-items: center;
-        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0.5rem 5rem;
     }
-    .nav-item {
-        list-style-type: none;
+    .search-form > input {
+        padding: 0.7rem;
+        letter-spacing: 0.06rem;
+        border-radius: 5px;
+        border: 1px solid gray;
+        flex: 2;
+        margin-right: 0.3rem;
     }
-    .nav-item > a {
-        display: inline-block;
-        padding: 1.5rem 1rem;
-        text-align: center;
-        text-decoration: none;
-        color: rgb(114, 114, 114);
+    .search-form > button {
+        padding: 0.7rem;
+        color: rgb(255, 255, 255);
+        background: blue;
+        border: 1px solid blue;
+        letter-spacing: 0.06rem;
+        border-radius: 5px;
+    }
+    @media screen and (min-width:1220px){
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-items {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto auto;
+            column-gap: 1.5rem;
+        }
     }
 </style>
-
-
 <div class="nav-container">
-    <div class="brand-name">
-        <a href="">TWEETclone</a>
-    </div>
-    <nav class="nav-bar">
+    <nav class="nav-wrapper">
+        <div class="brand-name-wrapper">
+            <a href="#">TWEETclone</a>
+        </div>
+        <form class='search-form' action="{% url 'tweets:search' %}" method="GET">
+            <input type="text" name="search" placeholder="Your search">
+            <button type="submit">Search</button>
+        </form>
         <ul class="nav-items">
-            <li class="nav-item"><a href="">Home</a></li>
-            <li class="nav-item"><a href="/my/tweets">My tweets</a></li>
-            <li class="nav-item"><a href="/login">Login</a></li>
-            <li class="nav-item"><a href="">Register</a></li>
-            <li class="nav-item"><a href="">Search</a></li>
+            <li><a href="">Home</a></li>
+            <li><a href="">My tweets</a></li>
+            <li><a href="">Contact</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Login</a></li>
+            <li><a href="">Register</a></li>
         </ul>
+        <!-- <form class='search-form' action="" method="GET">
+            <input type="text" name="search" placeholder="Your search">
+            <button type="submit">Search</button>
+        </form> -->
     </nav>
 </div>

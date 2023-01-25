@@ -1,143 +1,153 @@
 {% extends 'tweets/index.html' %}
 
 
+
 <title>
     {% block title %}
-        Home page
+        Home
     {% endblock title %}
 </title>
 
 
+
 {% block content %}
-    <div class="tweet-form-container">
-        <div class="error" style="color: red; padding: 1rem;"></div>
-        <form id='tweet-form' action="{% url 'tweets:new-tweet' %}" method="POST">
-            {% csrf_token %}
-            <input type="hidden" value="{% url 'tweets:home' %}" name="next">
-            <input type="text" name="title" placeholder="Title">
-            <textarea name="content" id="" cols="30" rows="10" placeholder="Your tweet..."></textarea>
-            <button type="submit">Tweet</button>
-        </form>
-    </div>
-    <div class="tweets-container">
-        <h1>Home page</h1>
-        <div id="tweets">
-            <h2>Tweets go here</h2>
+    <style>
+        .tweet-container {
+            width: 90%;
+            margin: 0 auto;
+        }
+        .home-header {
+            text-align: center;
+            letter-spacing: 0.06rem;
+            padding: 2rem 0;
+            /* border: 1px solid red; */
+        }
+        .tweet-form-wrapper {
+            padding: 2rem 0;
+            width: 50%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        /* .tweet-form {
+            width: 50%;
+            max-width: 600px;
+            margin: 0 auto;
+        } */
+        .tweet-form > div> input {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            letter-spacing: 0.06rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: none
+        }
+        .tweet-form > div> textarea {
+            display: block;
+            width: 100%;
+            resize: none;
+            padding: 1rem;
+            letter-spacing: 0.06rem;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+            border: none
+        }
+        .tweet-form > button {
+            display: block;
+            background:rgb(0, 153, 255);
+            margin-left: auto;
+            padding: 0.7rem 1rem;
+            font-size: 1rem;
+            letter-spacing: 0.06rem;
+            margin-top: 0.5rem;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+    </style>
+
+
+    <div class="tweet-container">
+        <!-- <div class="home-header">
+            <h1>Welcome to TWEETclone</h1>
+        </div> -->
+       
+        <div class="tweet-form-wrapper">
+            <div class="error-wrapper" style="display: none; padding: 0.5rem 0; color: red; letter-spacing: 0.06rem;">
+                <p class="error">error</p>
+            </div>
+            <form class='tweet-form' action="{% url 'tweets:new-tweet' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div style="padding: 2rem; border-radius: 10px; background: rgb(179, 203, 204)">
+                    <input type="hidden" value="{% url 'tweets:home' %}" name="next">
+                    <input type="text" name="title" placeholder="Title">
+                    <!-- <input type="file" value="Choose image" name="image"> -->
+                    <textarea name="content" id="" cols="30" rows="10" placeholder="Your tweet..."></textarea>
+                </div>
+                <button type="submit">Tweet</button>
+            </form>
+        </div>
+        <div class="tweets">
+
         </div>
     </div>
+   
+    {% if data %}
+        <script>
+            // let data = '{{ data }}'
+            // window.location.href = `https://www.google.com/search?q=${data}`
+            // window.open(
+            //     `https://www.google.com/search?q=${data}`, '_blank'
+            // )
+        </script>
+   
+    {% endif %}
 
 
 
+    <script type="text/javascript">
+        const tweetForm = document.querySelector('.tweet-form')
+        const tweets = document.querySelector('.tweets')
 
+        tweetForm.addEventListener('submit', function(event){
+            event.preventDefault()
+            const newTweet = event.target
+            const newFormData = new FormData(newTweet)
+            const method = newTweet.getAttribute('method')
+            const url = newTweet.getAttribute('action')
+            const responseType = 'json'
 
-
-<script type="text/javascript">
-    const tweetForm = document.querySelector('#tweet-form')
-    const tweets = document.querySelector('#tweets')
-
-    let tweetsChildren = []
-
-    tweetForm.addEventListener('submit', function(event){
-        event.preventDefault()
-
-        const targetElement = event.target
-        const newTweetForm = new FormData(targetElement)
-        const method = targetElement.getAttribute('method')
-        const url = targetElement.getAttribute('action')
-        const responseType = 'json'
-        const xhr = new XMLHttpRequest()
-
-        xhr.responseType = responseType
-        xhr.open(method, url)
-        xhr.setRequestHeader('HTTP_X_REQUESTED_WITH', 'XMLHttpRequest')
-        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-        xhr.onload = function() {
-            let jsonResponse = xhr.response
-            if(jsonResponse.error) {
-                // console.log(jsonResponse.error)
-                let error = document.querySelector('.error')
-                error.textContent = jsonResponse.error
+            const xhr = new XMLHttpRequest()
+            xhr.responseType = responseType
+            xhr.open(method, url)
+            xhr.onload = function(){
                 tweetForm.reset()
+                console.log(xhr.response)
+                const json = xhr.response
+                if(json.error) {
+                    const errorWrapper = document.querySelector('.error-wrapper')
+                    const error = document.querySelector('.error')
+                    errorWrapper.style.display = 'block'
+                    error.textContent = json.error
+                }
+                else if(json.annonymous) {
+                    const errorWrapper = document.querySelector('.error-wrapper')
+                    const error = document.querySelector('.error')
+                    errorWrapper.style.display = 'block'
+                    error.innerHTML = `${json.annonymous} <a href="#">Login</a>`
+                }
+                else {
+                    const tweetElement = `<div>
+                                            <h3>${json.title}</h3>
+                                            <p>${json.content}</p>
+                                        </div>`
+                    tweets.innerHTML = tweetElement + tweets.innerHTML
+                }
             }
-            else if(jsonResponse.annonymous) {
-                console.log(jsonResponse.annonymous)
-                alert(jsonResponse.annonymous)
-                window.location.href = '{% url "users:login" %}'
-            }
-            else {
-                let tweet = `<div  id='${jsonResponse.id}'style='border: 1px solid gray; padding: 1rem; line-height: 1.5'>
-                                <p>ID ${jsonResponse.id}</p>
-                                <h3>${jsonResponse.title}</h3>
-                                <p>${jsonResponse.content}</p>
-                                <div>
-                                    <a href="#">Reply</a>
-                                    <a href="#">Like</a>
-                                    <a href="#">Follow</a>
-                                    <a href="#">Delete</a>
-                                </div>
-                            </div>`
-                tweets.id = jsonResponse.id
-                tweets.innerHTML = tweet + tweets.innerHTML
-                let error = document.querySelector('.error')
-                error.textContent = ''
-                tweetForm.reset()
-            }
-        }
-        xhr.send(newTweetForm)
-    })
+            xhr.send(newFormData)
 
-    function loadTweets(){
-        const xhr = new XMLHttpRequest()
-        const method = 'GET'
-        const url = '{% url "tweets:tweets" %}'
-        const responseType = 'json'
-
-        xhr.responseType = responseType
-        xhr.open(method, url)
-        xhr.onload = function(){
-            const allTweets = [...xhr.response.tweets]
-            let tweetsList = '';
-            allTweets.forEach(function(tweet){
-                tweetsList += `<div id='tweet${tweet.id}' style='border: 1px solid gray; padding: 1rem; line-height: 1.5'>
-                                    <p>ID ${tweet.id}</p>
-                                    <h3>${tweet.title}</h3>
-                                    <p>${tweet.content}</p>
-                                    <div>
-                                        <span>${tweet.author}</span>
-                                        <a href="#">Reply</a>
-                                        <a href="#">Like</a>
-                                        <a href="#">Follow</a>
-                                        <a id='${tweet.id}' href="#">Delete</a>
-                                    </div>
-                                </div>`
-            })
-            tweets.innerHTML = tweetsList
-
-            tweetsChildren = [...tweets.children] 
-            tweetsChildren.forEach(function(tweet) {
-                const delBtn = tweet.children[3].children[4]
-                delBtn.addEventListener('click', function(event) {
-                    event.preventDefault()
-                    let id = parseInt(event.currentTarget.id)
-                    let xhr = new XMLHttpRequest(id)
-                    let method = 'GET'
-                    let url = "tweet/delete/" + id
-                    let responseType = 'json'
-                    xhr.responseType = responseType
-                    xhr.open(method, url)
-                    xhr.onload = function(){
-                        loadTweets()
-                        let response = xhr.response
-                        let id = response.id
-                        let element = document.querySelector('#tweet' + String(id))
-                        console.log(element)
-                    }
-                    xhr.send()
-                })
-            })
-        }
-        xhr.send()
-    }
-    loadTweets()
-</script>
+        })
+    </script>
 {% endblock content %}
