@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import TweetCreateForm
 
 
+
 def home_view(request):
     return render(request, 'tweets/home.html', context=None)
 
@@ -33,6 +34,10 @@ def tweet_create_view(request):
         }
         return JsonResponse(data)
         # return redirect('tweets:home')
+
+
+def tweets_view(request):
+    return JsonResponse({})
 
 
 def search_view(request):

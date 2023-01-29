@@ -13,26 +13,83 @@
 {% block content %}
     <style>
         .tweet-container {
-            width: 90%;
-            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+        }
+        .left-bar {
+            border-right: 1px solid rgb(226, 226, 226);
+            padding: 1rem 2rem;
+            /* border: 2px solid red; */
+        }
+        .right-bar {
+            border-left: 1px solid rgb(226, 226, 226);
+            padding: 1rem 2rem;
+            /* border: 2px solid red; */
+        }
+        .center {
+            padding: 1rem 0;
+        }
+        .brand-name-wrapper {
+            border: 1px solid red;
+        }
+        .brand-name-wrapper > a {
+            font-size: 1.8rem;
+            display: inline-block;
+            color: rgb(0, 188, 255);
+            letter-spacing: 0.05rem;
+            font-weight: bold;
+        }
+        .nav-items {
+            padding: 2rem 0;
+            display: grid;
+            row-gap: 2rem;
+        }
+        .nav-items > li > a {
+            display: block;
+            letter-spacing: 0.06rem;
+            font-weight: bold;
+            color: black;
+            font-size: 1rem;
         }
         .home-header {
-            text-align: center;
+            padding: 1rem 2rem; 
+            border-bottom: 1px solid lightgray; 
             letter-spacing: 0.06rem;
-            padding: 2rem 0;
-            /* border: 1px solid red; */
+        }
+        .search-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 5rem;
+        }
+        .search-form > input {
+            padding: 0.9rem;
+            letter-spacing: 0.06rem;
+            border-radius: 30px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border: 1px solid transparent;
+            flex: 2;
+            background: rgb(236, 236, 236);
+            font-size: 1rem;
+        }
+        .search-form > button {
+            padding: 0.9rem;
+            color: rgb(255, 255, 255);
+            background: rgb(0, 188, 255);
+            border: 1px solid rgb(0, 188, 255);
+            letter-spacing: 0.06rem;
+            border-radius: 30px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            font-size: 1rem;
         }
         .tweet-form-wrapper {
-            padding: 2rem 0;
-            width: 50%;
-            max-width: 600px;
-            margin: 0 auto;
+            padding: 0 2rem;
         }
-        /* .tweet-form {
-            width: 50%;
-            max-width: 600px;
-            margin: 0 auto;
-        } */
+        .tweet-form > div {
+            padding: 1rem;
+        }
         .tweet-form > div> input {
             display: block;
             width: 100%;
@@ -46,51 +103,173 @@
             display: block;
             width: 100%;
             resize: none;
-            padding: 1rem;
             letter-spacing: 0.06rem;
             font-size: 1rem;
-            margin-top: 0.5rem;
-            border-radius: 5px;
-            border: none
+            border: none;
         }
-        .tweet-form > button {
+        .tweet-form > div> button {
             display: block;
-            background:rgb(0, 153, 255);
+            background: rgb(0, 188, 255);
             margin-left: auto;
-            padding: 0.7rem 1rem;
+            padding: 0.6rem 1rem;
             font-size: 1rem;
-            letter-spacing: 0.06rem;
-            margin-top: 0.5rem;
-            color: white;
-            border-radius: 5px;
+            letter-spacing: 0.05rem;
+            color: rgb(255, 255, 255);
+            border-radius: 30px;
             cursor: pointer;
 
         }
+        .tweets {
+            padding: 0 2rem;
+        }
+        .tweet {
+            border: 1px solid lightblue; 
+            padding: 1.2rem; 
+            margin: 1rem 0;
+            letter-spacing: 0.06rem;
+            line-height: 1.5;
+            border-radius: 10px;
+        }
+        .tweet:first-child {
+            margin-top: 2rem !important;
+        }
+        .tweet:last-child {
+            margin-bottom: 0 !important;
+        }
+
+        /* Scroll Bar */
+        
+            /* width */
+            .center::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            /* Track */
+            .center::-webkit-scrollbar-track {
+                background:  rgb(233, 233, 233); 
+               
+                /* box-shadow: inset 0 0 5px grey; */
+                border-radius: 5px;
+            }
+            
+            /* Handle */
+            .center::-webkit-scrollbar-thumb {
+                background: rgb(201, 201, 201);
+                border-radius: 5px;
+            }
+
+            /* Handle on hover */
+            .center::-webkit-scrollbar-thumb:hover {
+                background: rgb(119, 119, 119); 
+            }
+            .center:hover::-webkit-scrollbar-thumb{
+                    background: rgb(119, 119, 119); 
+            }
+            /* .center:hover::-webkit-scrollbar {
+                width: 3px;
+            } */
     </style>
 
 
     <div class="tweet-container">
-        <!-- <div class="home-header">
-            <h1>Welcome to TWEETclone</h1>
-        </div> -->
-       
-        <div class="tweet-form-wrapper">
-            <div class="error-wrapper" style="display: none; padding: 0.5rem 0; color: red; letter-spacing: 0.06rem;">
-                <p class="error">error</p>
-            </div>
-            <form class='tweet-form' action="{% url 'tweets:new-tweet' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div style="padding: 2rem; border-radius: 10px; background: rgb(179, 203, 204)">
-                    <input type="hidden" value="{% url 'tweets:home' %}" name="next">
-                    <input type="text" name="title" placeholder="Title">
-                    <!-- <input type="file" value="Choose image" name="image"> -->
-                    <textarea name="content" id="" cols="30" rows="10" placeholder="Your tweet..."></textarea>
+        <div class='left-bar'>
+            <nav class='left-bar-inner-element' class="nav-wrapper">
+                <div class="brand-name-wrapper">
+                    <a href="{% url 'tweets:home' %}">
+                        <i class='fas fa-dove'style="font-size: 3rem; color: rgb(0, 188, 255)"></i>
+                        Tweet
+                    </a>
                 </div>
-                <button type="submit">Tweet</button>
-            </form>
+                <ul class="nav-items">
+                    <li><a href="{% url 'tweets:home' %}">Home</a></li>
+                    <li><a href="">My tweets</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="">About</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="tweets">
-
+        <div class='center'>
+            <div class="center-element-div">
+                <div class='home-header'>
+                    <h2>Home</h2>
+                </div>
+                <div class="tweet-form-wrapper">
+                    <form class='search-form' action="{% url 'tweets:search' %}" method="GET">
+                        <input type="text" name="search" placeholder="Your search">
+                        <button type="submit">Search</button>
+                    </form>
+                    <form class='tweet-form' action="{% url 'tweets:new-tweet' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div style="border: 1px solid lightblue; border-radius: 10px;">
+                            <input type="hidden" value="{% url 'tweets:home' %}" name="next">
+                            <textarea name="content" id="" rows='10' placeholder="Your tweet..."></textarea>
+                            <button type="submit">Tweet</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="tweets">
+                    <!-- tweets go here -->
+                </div>
+            </div>
+        </div>
+        <div class='right-bar'>
+            <div class="right-bar-inner-element">
+                <h2 style="border: 1px solid red;">Latest tweets</h2>
+                <div style="letter-spacing: 0.06rem; line-height: 1.5; padding: 1rem; border: 1px solid lightgray; 
+                    border-radius: 10px; margin-top: 1rem;">
+                    <h3>What is Lorem Ipsum?</h3>
+                    <p>Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                        
+                    </p> 
+                </div>
+                <div style="letter-spacing: 0.06rem; line-height: 1.5; padding: 1rem; border: 1px solid lightgray; 
+                    border-radius: 10px; margin-top: 1rem;">
+                    <h3>What is Lorem Ipsum?</h3>
+                    <p>Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                        
+                    </p> 
+                </div>
+                <div style="letter-spacing: 0.06rem; line-height: 1.5; padding: 1rem; border: 1px solid lightgray; 
+                    border-radius: 10px; margin-top: 1rem;">
+                    <h3>What is Lorem Ipsum?</h3>
+                    <p>Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                        
+                    </p> 
+                </div>
+                <div style="letter-spacing: 0.06rem; line-height: 1.5; padding: 1rem; border: 1px solid lightgray; 
+                    border-radius: 10px; margin-top: 1rem;">
+                    <h3>What is Lorem Ipsum?</h3>
+                    <p>Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                        
+                    </p> 
+                </div>
+                <div style="letter-spacing: 0.06rem; line-height: 1.5; padding: 1rem; border: 1px solid lightgray; 
+                    border-radius: 10px; margin-top: 1rem;">
+                    <h3>What is Lorem Ipsum?</h3>
+                    <p>Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                        
+                    </p> 
+                </div>
+                <div style="letter-spacing: 0.06rem; line-height: 1.5; padding: 1rem; border: 1px solid lightgray; 
+                    border-radius: 10px; margin-top: 1rem;">
+                    <h3>What is Lorem Ipsum?</h3>
+                    <p>Ipsum is simply dummy text of the printing and typesetting industry. 
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                        
+                    </p> 
+                </div>
+            </div>
         </div>
     </div>
    
@@ -108,11 +287,22 @@
 
 
     <script type="text/javascript">
+        const myList = [
+            "Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+        ]
         const tweetForm = document.querySelector('.tweet-form')
         const tweets = document.querySelector('.tweets')
+        const errorWrapper = document.querySelector('.error-wrapper')
+        const error = document.querySelector('.error')
 
         tweetForm.addEventListener('submit', function(event){
             event.preventDefault()
+
+            // error.innerHTML = ''
+    
             const newTweet = event.target
             const newFormData = new FormData(newTweet)
             const method = newTweet.getAttribute('method')
@@ -124,30 +314,81 @@
             xhr.open(method, url)
             xhr.onload = function(){
                 tweetForm.reset()
-                console.log(xhr.response)
                 const json = xhr.response
                 if(json.error) {
-                    const errorWrapper = document.querySelector('.error-wrapper')
-                    const error = document.querySelector('.error')
-                    errorWrapper.style.display = 'block'
+                    // const errorWrapper = document.querySelector('.error-wrapper')
+                    // const error = document.querySelector('.error')
+                    // errorWrapper.style.display = 'block'
                     error.textContent = json.error
                 }
-                else if(json.annonymous) {
-                    const errorWrapper = document.querySelector('.error-wrapper')
-                    const error = document.querySelector('.error')
-                    errorWrapper.style.display = 'block'
-                    error.innerHTML = `${json.annonymous} <a href="#">Login</a>`
-                }
+                // else if(json.annonymous) {
+                //     const errorWrapper = document.querySelector('.error-wrapper')
+                //     const error = document.querySelector('.error')
+                //     error.innerHTML = `${json.annonymous} <a href="#">Login</a>`
+                // }
                 else {
-                    const tweetElement = `<div>
-                                            <h3>${json.title}</h3>
-                                            <p>${json.content}</p>
-                                        </div>`
-                    tweets.innerHTML = tweetElement + tweets.innerHTML
+                    // const tweetElement = `<div>
+                    //                         <h3>${json.title}</h3>
+                    //                         <p>${json.content}</p>
+                    //                     </div>`
+                    const tweet = "Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    handleTweets(tweet)
+                    // tweets.innerHTML = tweetElement + tweets.innerHTML
                 }
             }
             xhr.send(newFormData)
 
         })
+
+        function loadTweets(){
+            const xhr = new XMLHttpRequest()
+            const method = 'GET'
+            const url = '{% url "tweets:tweets" %}'
+            const responseType = 'json'
+
+            xhr.responseType = responseType
+            xhr.open(method, url)
+            xhr.onload = function() {
+                console.log(xhr.response)
+                // const myList = ['dog', 'cat', 'rat', 'snake', 'fish']
+                myList.forEach(function(tweet){
+                    handleTweets(tweet)
+                })
+            }
+            xhr.send()
+        }
+        loadTweets()
+
+        function handleTweets(tweet) {
+            let tweetElement = `<div class='tweet'>
+                                    <p>${tweet}</p>
+                                </div>`
+            tweets.innerHTML = tweetElement + tweets.innerHTML
+        }
+
+
+
+        // const rightBarInnerElement = document.querySelector('.right-bar-inner-element')
+        // const leftBarInnerElement = document.querySelector('.left-bar-inner-element')
+        // const centerElementDiv = document.querySelector('.center-element-div')
+        // const body = document.querySelector('body')
+
+        // window.onscroll = function(){
+        //    console.log(window.scrollY)
+        //    let rightHeight = rightBarInnerElement.offsetHeight
+        //    let leftHeight = leftBarInnerElement.offsetHeight
+
+        //    if(window.scrollY >= rightHeight) {
+        //         rightBarInnerElement.style.position = 'sticky'
+        //         rightBarInnerElement.style.top = 0
+        //    }
+        //    if(window.scrollY >= leftHeight) {
+        //         leftBarInnerElement.style.position = 'sticky'
+        //         leftBarInnerElement.style.top = 0
+        //    }
+        //    if (window.scrollY === 0) {
+        //     rightBarInnerElement.style.position = 'initial'
+        //    }
+        // }
     </script>
 {% endblock content %}

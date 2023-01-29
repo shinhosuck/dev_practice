@@ -1,0 +1,74 @@
+{% extends 'tweets/index.html' %}
+
+
+
+<title>
+    {% block title %}
+        Register
+    {% endblock title %}
+</title>
+
+
+
+{% block content %}
+    <style>
+        .form-container {
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+        .form-container > form {
+            width: 500px;
+            padding: 1.5rem;
+            border-radius: 10px;
+            background: rgb(191, 229, 231)
+        }
+        .form-container > form > label {
+            display: block;
+            padding: 0.6rem 0;
+            width: 100%;
+        }
+        .form-container > form .label1 {
+            padding-top: 0;
+        }
+        .form-container > form > input {
+            display: block;
+            padding: 0.8rem;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+        }
+        .form-container > form > button {
+            display: block;
+            margin-left: auto;
+            padding: 0.7rem 1rem;
+            letter-spacing: 0.06rem;
+            color: white;
+            background: rgb(255, 69, 0);
+            margin-top: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <div class='form-container'>
+        <form action="{% url 'Users:register' %}" method="POST">
+            {% if error %}
+                <script>
+                    let error = '{{ error }}'
+                    let newError = `${error}`
+                    // alert(newError)
+                </script>
+            {% endif %}
+            {% csrf_token %}
+            <label class='label1' for="username">Username</label>
+            <input type="text" name="username" id="username">
+            <label for="password1">Password</label>
+            <input type="password" name="password1" id="password1">
+            <label for="password2">Password confirmation</label>
+            <input type="password" name="password2" id="password2">
+            <button type="submit">Register</button>
+        </form>
+    </div>
+{% endblock content %}
