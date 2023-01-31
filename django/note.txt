@@ -38,3 +38,4 @@ Load TWEETS USING JAVASCRIPT:
 3:07:24 - associate authenticated user to object
 3:29:59 - permission and roadmap
 3:16:19 - install django rest framework
+3:18:22 - django forms to django rest framework serializer

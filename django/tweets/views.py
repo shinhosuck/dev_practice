@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from .forms import TweetCreateForm
+from .rest_framework_serializer import TweetSelializer
 
 
 
@@ -9,6 +10,11 @@ def home_view(request):
 
 
 def tweet_create_view(request):
+    form = TweetSelializer(data=request.POST)
+    print(form.initial_data['content'])
+    return JsonResponse({'data':form.initial_data['content']})
+
+def tweet_create_view_pure_jango(request):
     user = request.user
     if user.is_authenticated:
         # if request.method == "POST":

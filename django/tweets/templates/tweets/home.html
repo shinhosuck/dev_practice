@@ -328,6 +328,7 @@
             xhr.onload = function(){
                 tweetForm.reset()
                 const json = xhr.response
+                console.log(json)
                 if(json.error) {
                     // const errorWrapper = document.querySelector('.error-wrapper')
                     // const error = document.querySelector('.error')

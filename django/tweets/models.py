@@ -6,7 +6,7 @@ from django.utils import timezone
 
 class Tweet(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, null=True, blank=True)
     content = models.TextField(null=True, blank=True)
     img = models.ImageField(default='/tweet-images', null=True, blank=True)
     date_created = models.DateTimeField(default=timezone.now)

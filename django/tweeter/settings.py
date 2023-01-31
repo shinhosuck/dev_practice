@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # MY APPS
     'tweets.apps.TweetsConfig',
-    'Users.apps.UsersConfig'
+    'Users.apps.UsersConfig',
+    # 3rd party apps
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
