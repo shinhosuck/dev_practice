@@ -1,0 +1,4 @@
+name, price, quantity, broken
+'SamSung', 450, 41, 4
+'Iphone', 450, 15, 1
+'LG', 450, 33, 0
