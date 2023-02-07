@@ -3,30 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link type="text/css" rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" type='text/css' href="style.css">
     <title>Document</title>
 </head>
 <body>
     <header>
-        <nav class="nav-container">
-            <div class="brand-wrapper">
-                <a href="">MySite</a>
-            </div>
-            <ul class="nav-items">
-                <li><a href="">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Contact</a></li>
-                <li><a href="">Login</a></li>
-                <li><a href="">Register</a></li>
-            </ul>
-        </nav>
+        <div class="nav-container">
+           <nav class="nav-wrapper">
+                <div class="brand-name">
+                    <a href="/">
+                        <p>D</p>
+                        <div>
+                            <p class="span-p">JANGO</p>
+                            <p>BLOG FORUM</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="search-form-container">
+                    <form id='search-form' action="" method="GET">
+                        <input type="hidden" value="/" name="next">
+                        <input id='data' type="text" name="search" placeholder="Search">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="font-awesome-btns">
+                    <i class="fas fa-bars bars-btn"></i>
+                    <i class="fas fa-times times-btn"></i>
+                </div>
+               <ul class="nav-items">
+                    <li class='mobile-search-form'>
+                        <form id='mobile-search' action="" method="GET">
+                            <input type="hidden" value="/" name="next">
+                            <input id='mobile-data' type="text" name="search" placeholder="Search">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </li>
+                   <li><a href="/">Home</a></li>
+                   <li><a href="">Contact</a></li>
+                   <li><a href="">About</a></li>
+                   <li><a href="">Login</a></li>
+                   <li><a href="">Register</a></li>
+               </ul>
+           </nav>
+       </div>
     </header>
     <main>
-        <div class="container">
-            <div>
-                <button id='cb-btn'>Change Background Color</button>
-            </div>
-        </div>
     </main>
     <script type="text/javascript" src="main.js"></script>
 </body>
