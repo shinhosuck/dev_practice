@@ -66,7 +66,7 @@ mobileSearch.addEventListener('submit', function(event){
     )
 })
 
-const num = ['s', 'z', 'c', 'r', 't', 'i']
-
-num.sort()
-console.log(num)
+// change text size
+const h1 = [...document.querySelectorAll('h1')]
+const h2 = [...document.querySelectorAll('h2')]
+const h3 = [...document.querySelectorAll('h3')]
