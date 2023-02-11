@@ -44,10 +44,15 @@ header {
     z-index: 2;
 }
 
+/* .top-border {
+    padding: 15px 0;
+    background: rgb(53, 0, 53);
+} */
+
 .nav-container {
     position: relative;
     /* padding: 0.5rem 0; */
-    background: rgba(26, 0, 26, 0.9);
+    /* background: rgba(26, 0, 26, 0.9); */
 }
 
 .nav-wrapper {
@@ -69,7 +74,7 @@ header {
 .brand-name > a > p {
     font-size: 4rem;
     font-weight: bold;
-    color: rgb(0, 139, 0);
+    color: hsl(120, 100%, 41%);
 }
 .nav-wrapper >
 .brand-name >
