@@ -2,473 +2,153 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="font_awesome6/css/all.css">
-    <link rel="stylesheet" type='text/css' href="style.css">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="font_awesome6/css/all.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Home</title>
 </head>
 <body>
     <header>
-        <div class="top-border"></div>
-        <div class="nav-container">
-           <nav class="nav-wrapper">
-                <div class="brand-name">
-                    <a href="/">
-                        <p>D</p>
-                        <div>
-                            <p class="span-p">JANGO</p>
-                            <p>BLOG FORUM</p>
-                        </div>
-                    </a>
+        <nav class="nav-container">
+            <div class="brand-name-container">
+                <a href="#">
+                    <span class="large">B</span>
+                    <div>
+                        <span>RAND</span>
+                        <span>FORUM</span>
+                    </div>
+                </a>
+
+                <div class="search">
+                    <i class="fas fa-search"></i>
                 </div>
-                <div class="search-form-container">
-                    <form id='search-form' action="" method="GET">
-                        <input type="hidden" value="/" name="next">
-                        <input id='data' type="text" name="search" placeholder="Search">
-                        <button type="submit">Search</button>
-                    </form>
-                </div>
+                
                 <div class="font-awesome-btns">
-                    <i class="fas fa-bars bars-btn"></i>
-                    <i class="fas fa-times times-btn"></i>
+                    <i class="fas fa-bars"></i>
                 </div>
-               <ul class="nav-items">
-                    <li class='mobile-search-form'>
-                        <form id='mobile-search' action="" method="GET">
-                            <input type="hidden" value="/" name="next">
-                            <input id='mobile-data' type="text" name="search" placeholder="Search">
-                            <button type="submit"><i class="fas fa-search"></i></button>
-                        </form>
-                    </li>
-                   <li><a href="/">Home</a></li>
-                   <li><a href="">Contact</a></li>
-                   <li><a href="">About</a></li>
-                   <li><a href="">Login</a></li>
-                   <li><a href="">Register</a></li>
-               </ul>
-           </nav>
-       </div>
+            </div>
+            <ul class="nav-items">
+                <li><a href="">home</a></li>
+                <li><a href="">login</a></li>
+                <li><a href="">register</a></li>
+                <li><a href="">about</a></li>
+                <li><a href="">contact</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
-        <div style="position: relative;">
-            <img src="blog1.jpg" alt="" style="width: 100%; height: auto; display: block;">
-            <div style="position:absolute; z-index: 1; top: 0; left: 0;
-                height: 100%; width: 100%; background: rgba(0, 0, 0, 0.356);
-                display: flex; align-items: center; justify-content: flex-end;">
-                <div style="margin-right: 12rem; color: white; 
-                    letter-spacing: 0.06rem; flex: 0 0 35%; text-align: center;">
-                    <h1 style="font-size: 3rem; ">What's on your mine?</h1>
-                    <p style="font-size: 1.2em; color: rgb(233, 233, 233);
-                        line-height: 1.4rem; padding-top: 0.5rem;">
-                        Lorem Ipsum is simply dummy text of the 
-                        printing and typesetting industry
-                    </p>
-                    <a href="/create.html" style="border-radius: 5px; padding: 0.7rem 1rem;
-                        background: rgb(0, 145, 0); color: white; font-size: 1.2rem; margin-top: 0.7rem">
-                        Create blog
-                    </a>
-                </div>
+        <div class="hero-img">
+            <img class="img3" src="./img3.webp" alt="">
+            <img class="img4" src="./img4.webp" alt="">
+            <img class="img5" src="./img5.webp" alt="">
+            <div class="hero-img-color-overlay"></div>
+       </div>
+       <div class="contents">
+            <div>
+                <h1>What is Lorem Ipsum?</h1>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                    when an unknown printer took a galley of type and scrambled it to make a type 
+                    specimen book. It has survived not only five centuries, but also the leap into 
+                    electronic typesetting, remaining essentially unchanged. It was popularised in 
+                    the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                    and more recently with desktop publishing software like Aldus PageMaker including 
+                    versions of Lorem Ipsum.
+                </p>
+            </div>
+            <div>
+                <h1>Why do we use it?</h1>
+                <p>
+                    It is a long established fact that a reader will be distracted 
+                    by the readable content of a page when looking at its layout. 
+                    The point of using Lorem Ipsum is that it has a more-or-less normal 
+                    distribution of letters, as opposed to using 'Content here, content here',
+                    making it look like readable English. Many desktop publishing packages and 
+                    web page editors now use Lorem Ipsum as their default model text, and a search for 
+                    'lorem ipsum' will uncover many web sites still in their infancy. Various versions 
+                    have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                </p>
+            </div>
+            <div>
+                <h1>Where does it come from?</h1>
+                <p>
+                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical 
+                    Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at 
+                    Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a 
+                    Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the 
+                    undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" 
+                    (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, 
+                    very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes 
+                    from a line in section 1.10.32.
+                </p>
+            </div>
+            <div>
+                <h1>What is Lorem Ipsum?</h1>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                    when an unknown printer took a galley of type and scrambled it to make a type 
+                    specimen book. It has survived not only five centuries, but also the leap into 
+                    electronic typesetting, remaining essentially unchanged. It was popularised in 
+                    the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                    and more recently with desktop publishing software like Aldus PageMaker including 
+                    versions of Lorem Ipsum.
+                </p>
+            </div>
+            <div>
+                <h1>Why do we use it?</h1>
+                <p>
+                    It is a long established fact that a reader will be distracted 
+                    by the readable content of a page when looking at its layout. 
+                    The point of using Lorem Ipsum is that it has a more-or-less normal 
+                    distribution of letters, as opposed to using 'Content here, content here',
+                    making it look like readable English. Many desktop publishing packages and 
+                    web page editors now use Lorem Ipsum as their default model text, and a search for 
+                    'lorem ipsum' will uncover many web sites still in their infancy. Various versions 
+                    have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                </p>
+            </div>
+            <div>
+                <h1>Where does it come from?</h1>
+                <p>
+                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical 
+                    Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at 
+                    Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a 
+                    Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the 
+                    undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" 
+                    (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, 
+                    very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes 
+                    from a line in section 1.10.32.
+                </p>
             </div>
        </div>
-        <div class="main-container">
-            <div class="content-container">
-                <div class="left-container">
-                    <div class="left-header">
-                        <h2>Popular posts</h2>
-                    </div>
-                    <div class="contents">
-                        <!-- left first content -->
-                        <div class="content">
-                            <div>
-                                <h3>What is Lorem Ipsum?</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the 
-                                    printing and typesetting industry. Lorem 
-                                </p>
-                            </div>
-                            <div class="left-font-awesome-btns" style="display: flex; 
-                                column-gap: 0.5rem;">
-                                <div style="color:rgb(87, 87, 87);">
-                                    <i class="fas fa-user"></i>
-                                    <span>Admin..</span>
-                                </div>
-                                <div style="color:rgb(87, 87, 87);">
-                                    <span>10</span>
-                                    <span>likes</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end of first content -->
-                        <!-- left second content -->
-                        <div class="content">
-                            <div>
-                                <h3>What is Lorem Ipsum?</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the 
-                                    printing and typesetting industry. Lorem 
-                                </p>
-                            </div>
-                            <div class="left-font-awesome-btns" style="display: flex; 
-                                column-gap: 0.5rem;">
-                                <div style="color:rgb(87, 87, 87);">
-                                    <i class="fas fa-user"></i>
-                                    <span>Admin..</span>
-                                </div>
-                                <div style="color:rgb(87, 87, 87);">
-                                    <span>10</span>
-                                    <span>likes</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end of second content -->
-                        <!-- left third content -->
-                        <div class="content">
-                            <div>
-                                <h3>What is Lorem Ipsum?</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the 
-                                    printing and typesetting industry. Lorem 
-                                </p>
-                            </div>
-                            <div class="left-font-awesome-btns" style="display: flex; 
-                                column-gap: 0.5rem;">
-                                <div style="color:rgb(87, 87, 87);">
-                                    <i class="fas fa-user"></i>
-                                    <span>Admin..</span>
-                                </div>
-                                <div style="color:rgb(87, 87, 87);">
-                                    <span>10</span>
-                                    <span>likes</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end of third content -->
-                        <!-- left fourth content -->
-                        <div class="content">
-                            <div>
-                                <h3>What is Lorem Ipsum?</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the 
-                                    printing and typesetting industry. Lorem 
-                                </p>
-                            </div>
-                            <div class="left-font-awesome-btns" style="display: flex; 
-                                column-gap: 0.5rem;">
-                                <div style="color:rgb(87, 87, 87);">
-                                    <i class="fas fa-user"></i>
-                                    <span>Admin..</span>
-                                </div>
-                                <div style="color:rgb(87, 87, 87);">
-                                    <span>10</span>
-                                    <span>likes</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end of fourth content -->
-                    </div>
-                </div>
-                <div id='home' class="center-container">
-                    <div class="center-header">
-                        <h2>Home</h2>
-                    </div>
-                    <div class="contents">
-                        <!-- <div>
-                                <i class="fas fa-user"></i>
-                                <i class="fas fa-file"></i>
-                                <i class="fas fa-image"></i>
-                            </div> -->
-                        <!-- first content -->
-                        <div class="content">
-                            <div>
-                                <h3>What is Lorem Ipsum?</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the 
-                                    printing and typesetting industry. Lorem 
-                                    Ipsum has been the industry's standard 
-                                    dummy text ever since the 1500s, when an 
-                                    unknown printer took a galley of type and 
-                                    scrambled it to make a type specimen book. 
-                                </p>
-                            </div>
-                            <div class="center-font-awesome-btns">
-                                <div>
-                                    <i class="fas fa-user"></i>
-                                    <span>Adm..</span>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fas fa-thumbs-up"></i>
-                                        <span>like</span>
-                                    </a>
-                                </div>
-                                <div>
-                                    <span>10</span>
-                                    <span>likes</span>
-                                </div>
-                                <div>
-                                    <a href="/create.html">
-                                        <i class="fas fa-reply"></i>
-                                        <span>reply</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end of first content -->
-                        <!-- second content -->
-                        <div class="content">
-                            <div>
-                                <h3>Why do we use it?</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the 
-                                    printing and typesetting industry. Lorem 
-                                    Ipsum has been the industry's standard 
-                                    dummy text ever since the 1500s, when an 
-                                    unknown printer took a galley of type and 
-                                    scrambled it to make a type specimen book. 
-                                </p>
-                            </div>
-                            <div class="center-font-awesome-btns">
-                                <div>
-                                    <i class="fas fa-user"></i>
-                                    <span>Adm..</span>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fas fa-thumbs-up"></i>
-                                        <span>like</span>
-                                    </a>
-                                </div>
-                                <div>
-                                    <span>10</span>
-                                    <span>likes</span>
-                                </div>
-                                <div>
-                                    <a href="/create.html">
-                                        <i class="fas fa-reply"></i>
-                                        <span>reply</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end of second content -->
-                        <!-- third conent -->
-                        <div class="content">
-                            <div>
-                                <h3>Where does it come from?</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the 
-                                    printing and typesetting industry. Lorem 
-                                    Ipsum has been the industry's standard 
-                                    dummy text ever since the 1500s, when an 
-                                    unknown printer took a galley of type and 
-                                    scrambled it to make a type specimen book. 
-                                </p>
-                            </div>
-                            <div class="center-font-awesome-btns">
-                                <div>
-                                    <i class="fas fa-user"></i>
-                                    <span>Adm..</span>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fas fa-thumbs-up"></i>
-                                        <span>like</span>
-                                    </a>
-                                </div>
-                                <div>
-                                    <span>10</span>
-                                    <span>likes</span>
-                                </div>
-                                
-                                <div>
-                                    <a href="/create.html">
-                                        <i class="fas fa-reply"></i>
-                                        <span>reply</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end of third content -->
-                        <!-- fourth content -->
-                        <div class="content">
-                            <div>
-                                <h3>Where does it come from?</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the 
-                                    printing and typesetting industry. Lorem 
-                                    Ipsum has been the industry's standard 
-                                    dummy text ever since the 1500s, when an 
-                                    unknown printer took a galley of type and 
-                                    scrambled it to make a type specimen book. 
-                                </p>
-                            </div>
-                            <div class="center-font-awesome-btns">
-                                <div>
-                                    <i class="fas fa-user"></i>
-                                    <span>Adm..</span>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fas fa-thumbs-up"></i>
-                                        <span>like</span>
-                                    </a>
-                                </div>
-                                <div>
-                                    <span>10</span>
-                                    <span>likes</span>
-                                </div>
-                                <div>
-                                    <a href="/create.html">
-                                        <i class="fas fa-reply"></i>
-                                        <span>reply</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end of fourth content -->
-                        <!-- fifth content -->
-                        <div class="content">
-                            <div>
-                                <h3>Where does it come from?</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the 
-                                    printing and typesetting industry. Lorem 
-                                    Ipsum has been the industry's standard 
-                                    dummy text ever since the 1500s, when an 
-                                    unknown printer took a galley of type and 
-                                    scrambled it to make a type specimen book. 
-                                </p>
-                            </div>
-                            <div class="center-font-awesome-btns">
-                                <div>
-                                    <i class="fas fa-user"></i>
-                                    <span>Adm..</span>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fas fa-thumbs-up"></i>
-                                        <span>like</span>
-                                    </a>
-                                </div>
-                                <div>
-                                    <span>10</span>
-                                    <span>likes</span>
-                                </div>
-                                <div>
-                                    <a href="/create.html">
-                                        <i class="fas fa-reply"></i>
-                                        <span>reply</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end of fifth content -->
-                    </div>
-                    <div class="load-more-blogs">
-                        <div class="left-chevron"><i class="fa-solid fa-caret-left"></i></div>
-                        <div class="numbers">
-                            <span>1</span>
-                            <span>2</span>
-                            <span>3</span>
-                            <span>4</span>
-                            <span>5</span>
-                        </div>
-                        <a href='#home' class="right-chevron"><i class="fa-solid fa-caret-right"></i></i></a>
-                    </div>
-                </div>
-                <div class="right-container">
-                    <div class="right-header">
-                        <h2>You might like</h2>
-                    </div>
-                    <div class="contents">
-                        <div class="content">
-                            <div>
-                                <h3>What is Lorem Ipsum?</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the 
-                                    printing and typesetting industry. Lorem 
-                                </p>
-                            </div>
-                            <div class="right-font-awesome-btns" style="display: flex; 
-                                column-gap: 0.5rem;">
-                                <div style="color:rgb(87, 87, 87);">
-                                    <i class="fas fa-user"></i>
-                                    <span>Admin..</span>
-                                </div>
-                                <div style="color:rgb(87, 87, 87);">
-                                    <span>10</span>
-                                    <span>likes</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <div>
-                                <h3>What is Lorem Ipsum?</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the 
-                                    printing and typesetting industry. Lorem 
-                                </p>
-                            </div>
-                            <div class="right-font-awesome-btns" style="display: flex; 
-                                column-gap: 0.5rem;">
-                                <div style="color:rgb(87, 87, 87);">
-                                    <i class="fas fa-user"></i>
-                                    <span>Admin..</span>
-                                </div>
-                                <div style="color:rgb(87, 87, 87);">
-                                    <span>10</span>
-                                    <span>likes</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <div>
-                                <h3>What is Lorem Ipsum?</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the 
-                                    printing and typesetting industry. Lorem 
-                                </p>
-                            </div>
-                            <div class="right-font-awesome-btns" style="display: flex; 
-                                column-gap: 0.5rem;">
-                                <div style="color:rgb(87, 87, 87);">
-                                    <i class="fas fa-user"></i>
-                                    <span>Admin..</span>
-                                </div>
-                                <div style="color:rgb(87, 87, 87);">
-                                    <span>10</span>
-                                    <span>likes</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content">
-                            <div>
-                                <h3>What is Lorem Ipsum?</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the 
-                                    printing and typesetting industry. Lorem 
-                                </p>
-                            </div>
-                            <div class="right-font-awesome-btns" style="display: flex; 
-                                column-gap: 0.5rem;">
-                                <div style="color:rgb(87, 87, 87);">
-                                    <i class="fas fa-user"></i>
-                                    <span>Admin..</span>
-                                </div>
-                                <div style="color:rgb(87, 87, 87);">
-                                    <span>10</span>
-                                    <span>likes</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
-    <script type="text/javascript" src="main.js"></script>
+    <script>
+
+        const btn = document.querySelector('.font-awesome-btns > i')
+        const navItems = document.querySelector('.nav-items')
+
+        btn.addEventListener('click', function(){
+            navItems.classList.toggle('show-nav-items')
+        })
+
+        window.addEventListener("scroll", function(){
+            const header = document.querySelector("header")
+            if(window.pageYOffset >= 414) {
+                header.classList.add("new-header-background")
+            }
+            else {
+                header.classList.remove("new-header-background")
+            }
+        })
+    </script>
+
 </body>
 </html>
